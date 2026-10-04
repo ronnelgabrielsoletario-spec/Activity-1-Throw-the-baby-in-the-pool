@@ -2,7 +2,6 @@ import { useEffect, useState } from "react";
 import Header from "./components/Header";
 import TaskForm from "./components/TaskForm";
 import TaskList from "./components/TaskList";
-//import "./App.css";
 
 const defaultTasks = [
   {
@@ -25,6 +24,8 @@ function App() {
       ? JSON.parse(savedTasks)
       : defaultTasks;
   });
+
+  const [searchTerm, setSearchTerm] = useState("");
 
   useEffect(() => {
     localStorage.setItem("studentTasks", JSON.stringify(tasks));
@@ -62,6 +63,10 @@ function App() {
   const completedTasks = tasks.filter(
     (task) => task.completed
   ).length;
+
+  const filteredTasks = tasks.filter((task) =>
+    task.title.toLowerCase().includes(searchTerm.toLowerCase())
+  );
 
   return (
     <div className="min-h-screen bg-slate-50 text-slate-900">
@@ -128,8 +133,16 @@ function App() {
 
           <TaskForm onAddTask={addTask} />
 
+          <input
+            type="text"
+            placeholder="Search tasks..."
+            value={searchTerm}
+            onChange={(e) => setSearchTerm(e.target.value)}
+            className="mb-4 w-full rounded-lg border border-slate-200 px-3 py-2.5 text-xs text-slate-700 outline-none placeholder:text-slate-400 focus:border-indigo-500 focus:ring-2 focus:ring-indigo-100"
+          />
+
           <TaskList
-            tasks={tasks}
+            tasks={filteredTasks}
             onToggle={toggleTask}
             onDelete={deleteTask}
           />
