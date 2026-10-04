@@ -2,7 +2,7 @@ import { useEffect, useState } from "react";
 import Header from "./components/Header";
 import TaskForm from "./components/TaskForm";
 import TaskList from "./components/TaskList";
-import "./App.css";
+//import "./App.css";
 
 const defaultTasks = [
   {
@@ -27,10 +27,7 @@ function App() {
   });
 
   useEffect(() => {
-    localStorage.setItem(
-      "studentTasks",
-      JSON.stringify(tasks)
-    );
+    localStorage.setItem("studentTasks", JSON.stringify(tasks));
   }, [tasks]);
 
   const addTask = (title) => {
@@ -40,10 +37,7 @@ function App() {
       completed: false,
     };
 
-    setTasks((currentTasks) => [
-      ...currentTasks,
-      newTask,
-    ]);
+    setTasks((currentTasks) => [...currentTasks, newTask]);
   };
 
   const toggleTask = (id) => {
@@ -70,47 +64,64 @@ function App() {
   ).length;
 
   return (
-    <div className="app">
+    <div className="min-h-screen bg-slate-50 text-slate-900">
       <Header />
 
-      <main className="container">
-        <section className="welcome">
-          <p className="small-title">
+      <main className="mx-auto max-w-3xl px-5 py-10">
+        <section className="mb-7">
+          <p className="mb-2 text-xs font-semibold tracking-widest text-indigo-600">
             STUDENT PRODUCTIVITY
           </p>
 
-          <h2>Stay organized. Get things done.</h2>
+          <h2 className="mb-2 text-2xl font-medium text-slate-900">
+            Stay organized. Get things done.
+          </h2>
 
-          <p>
+          <p className="text-sm text-slate-500">
             Manage your school tasks and keep track of your
             progress in one simple place.
           </p>
         </section>
 
-        <section className="stats">
-          <div className="stat-card">
-            <span>Total Tasks</span>
-            <strong>{tasks.length}</strong>
+        <section className="mb-5 grid grid-cols-1 gap-3 sm:grid-cols-3">
+          <div className="rounded-xl border border-slate-200 bg-white p-5">
+            <span className="text-xs text-slate-500">
+              Total Tasks
+            </span>
+
+            <strong className="mt-2 block text-2xl text-slate-900">
+              {tasks.length}
+            </strong>
           </div>
 
-          <div className="stat-card">
-            <span>Completed</span>
-            <strong>{completedTasks}</strong>
+          <div className="rounded-xl border border-slate-200 bg-white p-5">
+            <span className="text-xs text-slate-500">
+              Completed
+            </span>
+
+            <strong className="mt-2 block text-2xl text-slate-900">
+              {completedTasks}
+            </strong>
           </div>
 
-          <div className="stat-card">
-            <span>Remaining</span>
-            <strong>
+          <div className="rounded-xl border border-slate-200 bg-white p-5">
+            <span className="text-xs text-slate-500">
+              Remaining
+            </span>
+
+            <strong className="mt-2 block text-2xl text-slate-900">
               {tasks.length - completedTasks}
             </strong>
           </div>
         </section>
 
-        <section className="task-section">
-          <div className="section-header">
-            <h3>My Tasks</h3>
+        <section className="rounded-xl border border-slate-200 bg-white p-5">
+          <div className="mb-4">
+            <h3 className="text-base font-medium text-slate-900">
+              My Tasks
+            </h3>
 
-            <p>
+            <p className="mt-1 text-xs text-slate-500">
               Add and manage your school activities.
             </p>
           </div>
@@ -125,8 +136,8 @@ function App() {
         </section>
       </main>
 
-      <footer>
-        <p>
+      <footer className="py-10 text-center">
+        <p className="text-xs text-slate-400">
           Student Task Manager • React Activity 1
         </p>
       </footer>
