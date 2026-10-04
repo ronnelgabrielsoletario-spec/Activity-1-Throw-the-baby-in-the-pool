@@ -43,6 +43,18 @@ function TaskList({ tasks, onToggle, onDelete }) {
             {task.title}
           </span>
 
+          <span
+            className={`rounded-full px-2 py-1 text-[10px] font-medium ${
+              task.priority === "High"
+                ? "bg-red-50 text-red-600"
+                : task.priority === "Medium"
+                ? "bg-yellow-50 text-yellow-600"
+                : "bg-green-50 text-green-600"
+            }`}
+          >
+            {task.priority || "Medium"}
+          </span>
+
           <button
             className="rounded-md bg-red-50 px-3 py-1.5 text-[10px] font-medium text-red-500 transition hover:bg-red-100"
             onClick={() => onDelete(task.id)}

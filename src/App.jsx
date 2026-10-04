@@ -8,11 +8,13 @@ const defaultTasks = [
     id: 1,
     title: "Study React basics",
     completed: false,
+    priority: "Medium",
   },
   {
     id: 2,
     title: "Finish Activity 1",
     completed: false,
+    priority: "High",
   },
 ];
 
@@ -31,11 +33,12 @@ function App() {
     localStorage.setItem("studentTasks", JSON.stringify(tasks));
   }, [tasks]);
 
-  const addTask = (title) => {
+  const addTask = (title, priority) => {
     const newTask = {
       id: Date.now(),
       title: title,
       completed: false,
+      priority: priority,
     };
 
     setTasks((currentTasks) => [...currentTasks, newTask]);
